@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home - Resep Hemat{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<style>
+    .hero-final {
+        background: 
+            linear-gradient(135deg, rgba(40, 167, 69, 0.75), rgba(19, 236, 91, 0.75)),
+            url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600') center/cover no-repeat fixed;
+        color: white;
+        padding: 140px 0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero-final::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,0,0,0.3) 100%);
+    }
+    
+    .hero-final .container {
+        position: relative;
+        z-index: 2;
+    }
+    
+    .hero-final h1 {
+        text-shadow: 
+            2px 2px 4px rgba(0,0,0,0.5),
+            0 0 20px rgba(40, 167, 69, 0.5);
+        animation: slideInDown 0.8s ease-out;
+    }
+    
+    .hero-final .lead {
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+        animation: fadeIn 1s ease-out 0.3s both;
+    }
+    
+    .hero-final .btn {
+        animation: bounceIn 1s ease-out 0.6s both;
+        transition: all 0.3s ease;
+    }
+    
+    .hero-final .btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    
+    /* Decorative Elements */
+    .hero-final::after {
+        content: '🍳';
+        position: absolute;
+        font-size: 150px;
+        opacity: 0.1;
+        top: 20%;
+        right: 10%;
+        animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes slideInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes bounceIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.3);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+        70% {
+            transform: scale(0.9);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .hero-final {
+            padding: 80px 0;
+        }
+        .hero-final h1 {
+            font-size: 2.5rem;
+        }
+    }
+</style>
+
+<div class="hero-final text-center">
+    <div class="container">
+        <h1 class="display-3 fw-bold mb-3">Resep Hemat untuk Anak Kos</h1>
+        <p class="lead mb-4 fs-4">Masak enak, murah, dan mudah! Cocok untuk kantong mahasiswa</p>
+        <a href="{% url 'recipes' %}" class="btn btn-light btn-lg px-5 py-3 shadow-lg">
+            <i class="bi bi-book-fill me-2"></i>Lihat Semua Resep
+        </a>
+    </div>
+</div>
+
+<!-- Featured Recipes -->
+<div class="container my-5">
+    <h2 class="text-center mb-4 fw-bold">Resep Populer</h2>
+    <div class="row g-4">
+        {% for recipe in featured_recipes %}
+        <div class="col-md-4">
+            <div class="card recipe-card border-0 shadow-sm">
+                <div class="position-relative">
+                    <img src="{{ recipe.image }}" class="card-img-top recipe-img" alt="{{ recipe.title }}"
+                        onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect fill=%22%23667eea%22 width=%22400%22 height=%22200%22/%3E%3Ctext fill=%22white%22 font-size=%2240%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3E🍽️%3C/text%3E%3C/svg%3E';">
+                    <span class="budget-badge">Rp {{ recipe.budget }}</span>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ recipe.title }}</h5>
+                    <p class="card-text text-muted">{{ recipe.description }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">⏱️ {{ recipe.cooking_time }} menit</small>
+                        <a href="{% url 'recipe_detail' recipe.id %}" class="btn btn-success btn-sm">Lihat Resep</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">
+            <p class="text-muted">Belum ada resep tersedia</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Info Section -->
+<div class="bg-light py-5">
+    <div class="container">
+        <div class="row text-center g-4">
+            <div class="col-md-4">
+                <div class="p-4">
+                    <h1 class="text-success">💰</h1>
+                    <h5 class="fw-bold">Hemat Budget</h5>
+                    <p class="text-muted">Semua resep di bawah Rp 20.000</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4">
+                    <h1 class="text-success">⚡</h1>
+                    <h5 class="fw-bold">Cepat & Mudah</h5>
+                    <p class="text-muted">Maksimal 30 menit memasak</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4">
+                    <h1 class="text-success">🍽️</h1>
+                    <h5 class="fw-bold">Enak & Bergizi</h5>
+                    <p class="text-muted">Tetap lezat meski hemat</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

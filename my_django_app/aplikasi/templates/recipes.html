@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Daftar Resep - Resep Hemat{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2 class="fw-bold">Semua Resep</h2>
+            <p class="text-muted">Temukan resep hemat favorit kamu</p>
+        </div>
+        <div class="col-md-4">
+            <select class="form-select">
+                <option value="">Filter Budget</option>
+                <option value="5000">Di bawah Rp 5.000</option>
+                <option value="10000">Di bawah Rp 10.000</option>
+                <option value="15000">Di bawah Rp 15.000</option>
+                <option value="20000">Di bawah Rp 20.000</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        {% for recipe in recipes %}
+        <div class="col-md-4 col-lg-3">
+            <div class="card recipe-card border-0 shadow-sm h-100">
+                <div class="position-relative">
+                    <img src="{{ recipe.image }}" class="card-img-top recipe-img" alt="{{ recipe.title }}"
+                        onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect fill=%22%23667eea%22 width=%22400%22 height=%22200%22/%3E%3Ctext fill=%22white%22 font-size=%2240%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3E🍽️%3C/text%3E%3C/svg%3E';">
+                    <span class="budget-badge">Rp {{ recipe.budget }}</span>
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <h6 class="card-title fw-bold">{{ recipe.title }}</h6>
+                    <p class="card-text text-muted small flex-grow-1">{{ recipe.description }}</p>
+                    <div class="d-flex justify-content-between align-items-center mt-2">
+                        <small class="text-muted">⏱️ {{ recipe.cooking_time }} menit</small>
+                        <a href="{% url 'recipe_detail' recipe.id %}" class="btn btn-success btn-sm">Detail</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info text-center">
+                <h5>Belum ada resep tersedia</h5>
+                <p class="mb-0">Resep akan segera ditambahkan!</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

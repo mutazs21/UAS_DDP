@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About - Resep Hemat{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <h1 class="display-5 fw-bold text-success">🍳 Resep Hemat</h1>
+                        <p class="lead text-muted">Solusi Memasak untuk Anak Kos</p>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <h3 class="fw-bold mb-3">Tentang Kami</h3>
+                    <p>
+                        <strong>Resep Hemat</strong> adalah platform yang didedikasikan untuk membantu mahasiswa 
+                        dan anak kos dalam memasak makanan yang enak, sehat, dan terjangkau. Kami memahami 
+                        tantangan hidup sebagai anak kos dengan budget terbatas.
+                    </p>
+
+                    <h3 class="fw-bold mt-4 mb-3">Tujuan Kami</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">✅ Menyediakan resep dengan budget di bawah Rp 20.000 per porsi</li>
+                        <li class="mb-2">✅ Mengajarkan cara memasak yang mudah dan cepat</li>
+                        <li class="mb-2">✅ Membantu anak kos hidup lebih hemat dan sehat</li>
+                        <li class="mb-2">✅ Mengurangi ketergantungan pada makanan junk food</li>
+                    </ul>
+
+                    <h3 class="fw-bold mt-4 mb-3">Kenapa Resep Hemat?</h3>
+                    <div class="row text-center g-3">
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded">
+                                <h2 class="text-success">100+</h2>
+                                <p class="mb-0">Resep Tersedia</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded">
+                                <h2 class="text-success">&lt;30</h2>
+                                <p class="mb-0">Menit Memasak</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded">
+                                <h2 class="text-success">&lt;20k</h2>
+                                <p class="mb-0">Budget per Porsi</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-success mt-4">
+                        <h5 class="alert-heading">📧 Hubungi Kami</h5>
+                        <p class="mb-0">
+                            Punya saran resep atau kritik? Kirim email ke: 
+                            <strong>contact@resephemat.com</strong>
+                        </p>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="{% url 'recipes' %}" class="btn btn-success btn-lg px-5">Mulai Masak Sekarang!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
