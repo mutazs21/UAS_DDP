@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 
 def index(request):
     featured_recipes = [
@@ -6,7 +7,7 @@ def index(request):
             'id': 1,
             'title': 'Nasi Goreng Sederhana',
             'description': 'Nasi goreng enak dengan bumbu dapur',
-            'budget': '8.000',
+            'budget': 8000,
             'cooking_time': 15,
             'image': 'https://assets.unileversolutions.com/recipes-v2/258055.jpg'  
         },
@@ -14,7 +15,7 @@ def index(request):
             'id': 2,
             'title': 'Mie Goreng Telur',
             'description': 'Mie instan digoreng dengan telur',
-            'budget': '6.000',
+            'budget': 6000,
             'cooking_time': 10,
             'image': 'https://d1vbn70lmn1nqe.cloudfront.net/prod/wp-content/uploads/2023/08/01045246/ini-resep-mie-goreng-dengan-bahan-sederhana-yang-menggugah-selera-halodoc.jpg.webp'  
         },
@@ -22,7 +23,7 @@ def index(request):
             'id': 3,
             'title': 'Capcay Hemat',
             'description': 'Tumis sayuran bergizi',
-            'budget': '12.000',
+            'budget': 12000,
             'cooking_time': 20,
             'image': 'https://cdn0-production-images-kly.akamaized.net/CqSVKBFZK5RdW-xDDOi8BTZsGgM=/1200x675/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3147148/original/023254000_1591628473-051260000_1465292757-royco.coid.jpg' 
         }
@@ -42,7 +43,7 @@ def recipes(request):
             'id': 1,
             'title': 'Nasi Goreng Sederhana',
             'description': 'Nasi goreng enak dengan bumbu dapur sederhana',
-            'budget': '8.000',
+            'budget': 8000,
             'cooking_time': 15,
             'servings': 1,
             'image': 'https://assets.unileversolutions.com/recipes-v2/258055.jpg'  
@@ -51,7 +52,7 @@ def recipes(request):
             'id': 2,
             'title': 'Mie Goreng Telur',
             'description': 'Mie instan digoreng dengan telur mata sapi',
-            'budget': '6.000',
+            'budget': 6000,
             'cooking_time': 10,
             'servings': 1,
             'image': 'https://d1vbn70lmn1nqe.cloudfront.net/prod/wp-content/uploads/2023/08/01045246/ini-resep-mie-goreng-dengan-bahan-sederhana-yang-menggugah-selera-halodoc.jpg.webp'  
@@ -60,7 +61,7 @@ def recipes(request):
             'id': 3,
             'title': 'Capcay Hemat',
             'description': 'Tumis sayuran bergizi dan lezat',
-            'budget': '12.000',
+            'budget': 12000,
             'cooking_time': 20,
             'servings': 2,
             'image': 'https://cdn0-production-images-kly.akamaized.net/CqSVKBFZK5RdW-xDDOi8BTZsGgM=/1200x675/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3147148/original/023254000_1591628473-051260000_1465292757-royco.coid.jpg'  
@@ -69,7 +70,7 @@ def recipes(request):
             'id': 4,
             'title': 'Telur Dadar Isi',
             'description': 'Telur dadar dengan sayuran',
-            'budget': '5.000',
+            'budget': 5000,
             'cooking_time': 8,
             'servings': 1,
             'image': 'https://assets.unileversolutions.com/v1/1786169.jpg'  
@@ -78,7 +79,7 @@ def recipes(request):
             'id': 5,
             'title': 'Tumis Kangkung',
             'description': 'Kangkung tumis terasi pedas',
-            'budget': '7.000',
+            'budget': 7000,
             'cooking_time': 12,
             'servings': 2,
             'image': 'https://assets.unileversolutions.com/recipes-v2/230520.jpg'  
@@ -87,15 +88,39 @@ def recipes(request):
             'id': 6,
             'title': 'Soto Ayam Sederhana',
             'description': 'Soto ayam hangat untuk makan siang',
-            'budget': '15.000',
+            'budget': 15000,
             'cooking_time': 25,
             'servings': 1,
             'image': 'https://assets.pikiran-rakyat.com/crop/0x0:0x0/720x0/webp/photo/2023/08/18/805485417.jpg'  
         }
     ]
     
+    # Filter berdasarkan budget
+    budget_filter = request.GET.get('budget', '')
+    time_filter = request.GET.get('time', '')
+    search_query = request.GET.get('search', '').lower()
+    
+    filtered_recipes = recipes_list
+    
+    # Filter budget
+    if budget_filter:
+        budget_limit = int(budget_filter)
+        filtered_recipes = [r for r in filtered_recipes if r['budget'] <= budget_limit]
+    
+    # Filter waktu
+    if time_filter:
+        time_limit = int(time_filter)
+        filtered_recipes = [r for r in filtered_recipes if r['cooking_time'] <= time_limit]
+    
+    # Search
+    if search_query:
+        filtered_recipes = [r for r in filtered_recipes if search_query in r['title'].lower() or search_query in r['description'].lower()]
+    
     context = {
-        'recipes': recipes_list
+        'recipes': filtered_recipes,
+        'budget_filter': budget_filter,
+        'time_filter': time_filter,
+        'search_query': search_query
     }
     return render(request, 'recipes.html', context)
 
@@ -105,7 +130,7 @@ def recipe_detail(request, recipe_id):
             'id': 1,
             'title': 'Nasi Goreng Sederhana',
             'description': 'Nasi goreng enak dengan bumbu dapur sederhana yang mudah dibuat',
-            'budget': '8.000',
+            'budget': 8000,
             'cooking_time': 15,
             'servings': 1,
             'image': 'https://assets.unileversolutions.com/recipes-v2/258055.jpg', 
@@ -132,7 +157,7 @@ def recipe_detail(request, recipe_id):
             'id': 2,
             'title': 'Mie Goreng Telur',
             'description': 'Mie instan digoreng dengan telur mata sapi',
-            'budget': '6.000',
+            'budget': 6000,
             'cooking_time': 10,
             'servings': 1,
             'image': 'https://d1vbn70lmn1nqe.cloudfront.net/prod/wp-content/uploads/2023/08/01045246/ini-resep-mie-goreng-dengan-bahan-sederhana-yang-menggugah-selera-halodoc.jpg.webp', 
@@ -157,7 +182,7 @@ def recipe_detail(request, recipe_id):
             'id': 3,
             'title': 'Capcay Hemat',
             'description': 'Tumis sayuran bergizi dan lezat',
-            'budget': '12.000',
+            'budget': 12000,
             'cooking_time': 20,
             'servings': 2,
             'image': 'https://cdn0-production-images-kly.akamaized.net/CqSVKBFZK5RdW-xDDOi8BTZsGgM=/1200x675/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3147148/original/023254000_1591628473-051260000_1465292757-royco.coid.jpg', 
@@ -186,7 +211,7 @@ def recipe_detail(request, recipe_id):
             'id': 4,
             'title': 'Telur Dadar Isi',
             'description': 'Telur dadar dengan isian sayuran sederhana dan bergizi',
-            'budget': '5.000',
+            'budget': 5000,
             'cooking_time': 8,
             'servings': 1,
             'image': 'https://assets.unileversolutions.com/v1/1786169.jpg',
@@ -212,7 +237,7 @@ def recipe_detail(request, recipe_id):
             'id': 5,
             'title': 'Tumis Kangkung',
             'description': 'Kangkung tumis terasi pedas khas rumahan',
-            'budget': '7.000',
+            'budget': 7000,
             'cooking_time': 12,
             'servings': 2,
             'image': 'https://assets.unileversolutions.com/recipes-v2/230520.jpg',
@@ -238,7 +263,7 @@ def recipe_detail(request, recipe_id):
             'id': 6,
             'title': 'Soto Ayam Sederhana',
             'description': 'Soto ayam hangat dan gurih untuk makan siang',
-            'budget': '15.000',
+            'budget': 15000,
             'cooking_time': 25,
             'servings': 1,
             'image': 'https://assets.pikiran-rakyat.com/crop/0x0:0x0/720x0/webp/photo/2023/08/18/805485417.jpg',
@@ -273,3 +298,88 @@ def recipe_detail(request, recipe_id):
 
 def about(request):
     return render(request, 'about.html')
+
+# ===== FITUR FORM PROCESSING =====
+
+def submit_recipe(request):
+    """Form untuk user submit resep mereka sendiri"""
+    if request.method == 'POST':
+        # Ambil data dari form
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        budget = request.POST.get('budget')
+        cooking_time = request.POST.get('cooking_time')
+        ingredients = request.POST.get('ingredients')
+        steps = request.POST.get('steps')
+        submitter_name = request.POST.get('submitter_name')
+        submitter_email = request.POST.get('submitter_email')
+        
+        # Validasi
+        if not all([title, description, budget, cooking_time, ingredients, steps, submitter_name, submitter_email]):
+            messages.error(request, 'Semua field harus diisi!')
+            return render(request, 'submit_recipe.html')
+        
+        # Di sini bisa simpan ke database
+        # Untuk sekarang kita simpan ke session
+        if 'submitted_recipes' not in request.session:
+            request.session['submitted_recipes'] = []
+        
+        submitted_recipe = {
+            'title': title,
+            'description': description,
+            'budget': budget,
+            'cooking_time': cooking_time,
+            'ingredients': ingredients,
+            'steps': steps,
+            'submitter_name': submitter_name,
+            'submitter_email': submitter_email
+        }
+        
+        request.session['submitted_recipes'].append(submitted_recipe)
+        request.session.modified = True
+        
+        messages.success(request, f'Terima kasih {submitter_name}! Resep "{title}" berhasil dikirim dan akan direview oleh admin.')
+        return redirect('submit_recipe')
+    
+    return render(request, 'submit_recipe.html')
+
+def budget_calculator(request):
+    """Kalkulator budget belanja mingguan"""
+    result = None
+    
+    if request.method == 'POST':
+        try:
+            weekly_budget = float(request.POST.get('weekly_budget', 0))
+            meals_per_day = int(request.POST.get('meals_per_day', 3))
+            
+            # Hitung budget per hari dan per makan
+            daily_budget = weekly_budget / 7
+            budget_per_meal = daily_budget / meals_per_day
+            
+            # Saran kategori resep
+            if budget_per_meal < 7000:
+                category = 'Super Hemat'
+                suggestions = ['Telur Dadar Isi', 'Mie Goreng Telur', 'Tumis Kangkung']
+            elif budget_per_meal < 10000:
+                category = 'Hemat'
+                suggestions = ['Nasi Goreng Sederhana', 'Tumis Kangkung', 'Telur Dadar Isi']
+            elif budget_per_meal < 15000:
+                category = 'Standar'
+                suggestions = ['Capcay Hemat', 'Nasi Goreng Sederhana', 'Soto Ayam Sederhana']
+            else:
+                category = 'Premium'
+                suggestions = ['Soto Ayam Sederhana', 'Capcay Hemat', 'Bebek Goreng']
+            
+            result = {
+                'weekly_budget': f'{weekly_budget:,.0f}',
+                'daily_budget': f'{daily_budget:,.0f}',
+                'budget_per_meal': f'{budget_per_meal:,.0f}',
+                'category': category,
+                'suggestions': suggestions
+            }
+            
+        except (ValueError, TypeError):
+            messages.error(request, 'Mohon masukkan angka yang valid!')
+    
+    context = {'result': result}
+    return render(request, 'budget_calculator.html', context)

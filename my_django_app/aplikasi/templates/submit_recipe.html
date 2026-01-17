@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Submit Resep - Resep Hemat{% endblock %}
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Header -->
+            <div class="text-center mb-4">
+                <h2 class="fw-bold">Bagikan Resep Hematmu! 🍳</h2>
+                <p class="text-muted">Bantu teman-teman kos lain dengan resep hemat andalanmu</p>
+            </div>
+
+            <!-- Alert Messages -->
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endfor %}
+            {% endif %}
+
+            <!-- Form -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <form method="POST" action="{% url 'submit_recipe' %}">
+                        {% csrf_token %}
+                        
+                        <h5 class="mb-3">Informasi Resep</h5>
+                        
+                        <!-- Nama Resep -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Nama Resep *</label>
+                            <input type="text" class="form-control" id="title" name="title" 
+                                   placeholder="Contoh: Nasi Goreng Teri" required>
+                        </div>
+
+                        <!-- Deskripsi -->
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Deskripsi Singkat *</label>
+                            <textarea class="form-control" id="description" name="description" rows="2" 
+                                      placeholder="Jelaskan resepmu dalam 1-2 kalimat" required></textarea>
+                        </div>
+
+                        <div class="row">
+                            <!-- Budget -->
+                            <div class="col-md-6 mb-3">
+                                <label for="budget" class="form-label">Budget (Rp) *</label>
+                                <input type="number" class="form-control" id="budget" name="budget" 
+                                       placeholder="8000" min="1000" required>
+                                <small class="text-muted">Estimasi biaya untuk 1 porsi</small>
+                            </div>
+
+                            <!-- Waktu Memasak -->
+                            <div class="col-md-6 mb-3">
+                                <label for="cooking_time" class="form-label">Waktu Memasak (menit) *</label>
+                                <input type="number" class="form-control" id="cooking_time" name="cooking_time" 
+                                       placeholder="15" min="1" required>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <!-- Bahan-bahan -->
+                        <div class="mb-3">
+                            <label for="ingredients" class="form-label">Bahan-bahan *</label>
+                            <textarea class="form-control" id="ingredients" name="ingredients" rows="6" 
+                                      placeholder="Tulis setiap bahan di baris baru:&#10;- 1 piring nasi putih&#10;- 2 butir telur&#10;- 2 siung bawang putih" 
+                                      required></textarea>
+                            <small class="text-muted">Tulis satu bahan per baris</small>
+                        </div>
+
+                        <!-- Langkah-langkah -->
+                        <div class="mb-3">
+                            <label for="steps" class="form-label">Cara Memasak *</label>
+                            <textarea class="form-control" id="steps" name="steps" rows="8" 
+                                      placeholder="Tulis setiap langkah di baris baru:&#10;1. Panaskan minyak&#10;2. Tumis bawang hingga harum&#10;3. Masukkan nasi" 
+                                      required></textarea>
+                            <small class="text-muted">Tulis langkah-langkah secara jelas dan berurutan</small>
+                        </div>
+
+                        <hr>
+
+                        <h5 class="mb-3">Informasi Kontributor</h5>
+
+                        <!-- Nama Kontributor -->
+                        <div class="mb-3">
+                            <label for="submitter_name" class="form-label">Nama Kamu *</label>
+                            <input type="text" class="form-control" id="submitter_name" name="submitter_name" 
+                                   placeholder="Nama lengkap atau nama panggilan" required>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="submitter_email" class="form-label">Email *</label>
+                            <input type="email" class="form-control" id="submitter_email" name="submitter_email" 
+                                   placeholder="email@example.com" required>
+                            <small class="text-muted">Kami akan menghubungi jika resepmu dipublikasikan</small>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="bi bi-send-fill me-2"></i>Kirim Resep
+                            </button>
+                            <a href="{% url 'recipes' %}" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-2"></i>Kembali
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Info Box -->
+            <div class="alert alert-info mt-4">
+                <h6 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Ketentuan Submit Resep:</h6>
+                <ul class="mb-0 small">
+                    <li>Resep harus original atau hasil modifikasi sendiri</li>
+                    <li>Budget maksimal Rp 20.000 per porsi</li>
+                    <li>Waktu memasak maksimal 30 menit</li>
+                    <li>Menggunakan bahan yang mudah didapat</li>
+                    <li>Resep akan direview dalam 1-3 hari kerja</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

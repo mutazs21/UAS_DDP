@@ -136,7 +136,7 @@
                 <div class="position-relative">
                     <img src="{{ recipe.image }}" class="card-img-top recipe-img" alt="{{ recipe.title }}"
                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect fill=%22%23667eea%22 width=%22400%22 height=%22200%22/%3E%3Ctext fill=%22white%22 font-size=%2240%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3E🍽️%3C/text%3E%3C/svg%3E';">
-                    <span class="budget-badge">Rp {{ recipe.budget }}</span>
+                    <span class="budget-badge">Rp {{ recipe.budget|floatformat:0 }}</span>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{ recipe.title }}</h5>
@@ -184,4 +184,49 @@
         </div>
     </div>
 </div>
+
+<!-- Features Section -->
+<div class="container my-5">
+    <h2 class="text-center mb-4 fw-bold">Fitur Kami</h2>
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100 hover-lift">
+                <div class="card-body text-center p-4">
+                    <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex p-4 mb-3">
+                        <i class="bi bi-calculator text-success" style="font-size: 3rem;"></i>
+                    </div>
+                    <h5 class="fw-bold">Kalkulator Budget</h5>
+                    <p class="text-muted">Hitung budget makan mingguanmu dengan mudah</p>
+                    <a href="{% url 'budget_calculator' %}" class="btn btn-success btn-sm mt-2">
+                        Coba Sekarang
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100 hover-lift">
+                <div class="card-body text-center p-4">
+                    <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex p-4 mb-3">
+                        <i class="bi bi-plus-circle text-success" style="font-size: 3rem;"></i>
+                    </div>
+                    <h5 class="fw-bold">Submit Resep</h5>
+                    <p class="text-muted">Bagikan resep hemat andalanmu</p>
+                    <a href="{% url 'submit_recipe' %}" class="btn btn-success btn-sm mt-2">
+                        Kirim Resep
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-lift:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
+}
+</style>
 {% endblock %}
