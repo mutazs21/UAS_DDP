@@ -1,0 +1,14 @@
+# Django Framework
+Django==6.0
+
+# Database
+# SQLite sudah built-in di Python, tidak perlu install
+
+# Web Server (Production)
+gunicorn==21.2.0
+
+# Utilities
+Pillow==10.2.0
+
+# Development Tools
+python-decouple==3.8
