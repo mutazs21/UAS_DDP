@@ -5,7 +5,7 @@
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple.svg)](https://getbootstrap.com/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> **Project UAS Dasar-Dasar Pemrograman - Semester 1**  
+> **Project UAS Dasar-Dasar Pemrograman - Kelompok 12**  
 > Aplikasi web berbasis Django untuk membantu mahasiswa dan anak kos menemukan resep makanan hemat, mudah, dan lezat.
 
 ---
@@ -21,7 +21,7 @@
 - [Screenshot](#-screenshot)
 - [Kontribusi](#-kontribusi)
 - [Lisensi](#-lisensi)
-- [Kontak](#-kontak)
+- [Developer](#-developer)
 
 ---
 
@@ -314,34 +314,16 @@ in the Software without restriction...
 
 ## 👨‍💻 Developer
 
-**Mumtaaz Shidqon**
-- 📧 Email: mumtaaz@example.com
-- 🌐 Portfolio: [mutazs21.github.io/Portofolio](https://mutazs21.github.io/Portofolio/)
-- 💼 GitHub: [@mutazs21](https://github.com/mutazs21)
-- 🎓 Program Studi: Teknik Informatika
-- 📚 Mata Kuliah: Dasar-Dasar Pemrograman
+**Kelompok 12**
+- Mumtaaz Abdurrahman - 0110225164
+- Muhammad Ilyas Adityarahamn - 0110225172
+- Wahyu Irawan Saputra - 0110225168
+- Azzidan al'fatio syachputra - 0110225173
+- Indah Nurul Ayni Hasibuan - 0110225121
 
 ---
 
-## 🙏 Acknowledgments
 
-- **Dosen Pengampu**: [Nama Dosen] - Terima kasih atas bimbingannya
-- **Bootstrap**: Untuk framework CSS yang memudahkan development
-- **Unsplash**: Untuk foto-foto berkualitas tinggi
-- **Django Documentation**: Untuk panduan yang lengkap
-- **Stack Overflow Community**: Untuk solusi berbagai masalah teknis
-
----
-
-## 📞 Kontak
-
-Jika ada pertanyaan atau saran, silakan hubungi:
-
-- **Email**: mumtaaz@example.com
-- **WhatsApp**: +62 895-3405-02313
-- **LinkedIn**: [Mumtaaz Shidqon](https://linkedin.com/in/mumtaaz)
-
----
 
 <div align="center">
 
