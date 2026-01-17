@@ -303,7 +303,7 @@ Project ini dilisensikan di bawah [MIT License](LICENSE).
 ```
 MIT License
 
-Copyright (c) 2025 Mumtaaz Shidqon
+Copyright (c) 2025 Kelompok 12
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
