@@ -3,7 +3,6 @@
 [![Django](https://img.shields.io/badge/Django-6.0-green.svg)](https://www.djangoproject.com/)
 [![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple.svg)](https://getbootstrap.com/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **Project UAS Dasar-Dasar Pemrograman - Kelompok 12**  
 > Aplikasi web berbasis Django untuk membantu mahasiswa dan anak kos menemukan resep makanan hemat, mudah, dan lezat.
@@ -20,7 +19,6 @@
 - [Cara Menjalankan](#-cara-menjalankan)
 - [Screenshot](#-screenshot)
 - [Kontribusi](#-kontribusi)
-- [Lisensi](#-lisensi)
 - [Developer](#-developer)
 
 ---
@@ -221,7 +219,7 @@ http://127.0.0.1:8000/admin/
 ## 📸 Screenshot
 
 ### 🏠 Homepage
-![Homepage](docs/screenshots/homepage.png)
+![Homepage](screenshoot-website/Home.png)
 *Tampilan homepage dengan hero section dan featured recipes*
 
 ### 📖 Daftar Resep
@@ -293,22 +291,6 @@ Kontribusi sangat diterima! Jika Anda ingin berkontribusi:
 - [ ] Nutrition calculator
 - [ ] Recipe video tutorials
 - [ ] Multi-language support
-
----
-
-## 📄 Lisensi
-
-Project ini dilisensikan di bawah [MIT License](LICENSE).
-
-```
-MIT License
-
-Copyright (c) 2025 Kelompok 12
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction...
-```
 
 ---
 
