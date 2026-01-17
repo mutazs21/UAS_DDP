@@ -223,16 +223,24 @@ http://127.0.0.1:8000/admin/
 *Tampilan homepage dengan hero section dan featured recipes*
 
 ### 📖 Daftar Resep
-![Recipes List](docs/screenshots/recipes.png)
+![Recipes List](screenshoot-website/Resep.png)
 *Grid view dengan filter dan search*
 
 ### 🔍 Detail Resep
-![Recipe Detail](docs/screenshots/detail.png)
+![Recipe Detail](screenshoot-website/detail-resep.png)
 *Detail lengkap dengan bahan dan langkah memasak*
 
+### Tentang Kami
+![Tentang Kami](screenshoot-website/About.png)
+*Tentang website kami*
+
 ### 💵 Budget Calculator
-![Calculator](docs/screenshots/calculator.png)
+![Calculator](screenshoot-website/kalkulator-budget.png)
 *Kalkulator budget dengan rekomendasi resep*
+
+### Share Resep
+![Share Resep](screenshoot-website/share-resep.png)
+*Disini kamu bisa share resep kamu sendiri*
 
 ---
 
